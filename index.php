@@ -1,5 +1,24 @@
 <?php
-require __DIR__.'/libs/ganon.php';
+
+// create a new persistent client
+$m = new Memcached("memcached_pool");
+$m->setOption(Memcached::OPT_BINARY_PROTOCOL, TRUE);
+$m->setOption(Memcached::OPT_NO_BLOCK, TRUE);
+$m->setOption(Memcached::OPT_AUTO_EJECT_HOSTS, TRUE);
+if (!$m->getServerList()) {
+    $servers = explode(",", getenv("MEMCACHIER_SERVERS"));
+    foreach ($servers as $s) {
+        $parts = explode(":", $s);
+        $m->addServers($parts[0], $parts[1]);
+    }
+}
+$m->setSaslAuthData( getenv("MEMCACHIER_USERNAME")
+                   , getenv("MEMCACHIER_PASSWORD") );
+
+$output = $m->get("aktuel");
+
+if(empty($aktuel)){
+	require __DIR__.'/libs/ganon.php';
 	$link = "http://www.bim.com.tr/Categories/100/aktuel_urunler.aspx";
 	$html = file_get_dom($link);
 	if(!empty($html)){
@@ -19,11 +38,13 @@ require __DIR__.'/libs/ganon.php';
 		}
 	
 	}
-
-
-
 echo "Bilgi : ".$link."\n\n";
 
-for($i=0;$i<count($items);++$i){
-	echo $items[$i]."\t\t".$prices[$i].$pricesFraction[$i]."\n";
+	for($i=0;$i<count($items);++$i){
+		$output.=$items[$i]."\t\t".$prices[$i].$pricesFraction[$i]."\n";
+	}
+	echo "<!-- #nocache -->";
+	$m->set("aktuel",$output,3600);
 }
+
+echo $output;
