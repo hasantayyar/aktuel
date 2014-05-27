@@ -1,6 +1,5 @@
 <?php
-require __DIR__.'/../libs/Process.php';
-require __DIR__.'/../libs/ganon.php';
+require __DIR__.'/libs/ganon.php';
 	$link = "http://www.bim.com.tr/Categories/100/aktuel_urunler.aspx";
 	$html = file_get_dom($link);
 	if(!empty($html)){
