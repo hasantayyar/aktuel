@@ -6,11 +6,8 @@ $m->setOption(Memcached::OPT_BINARY_PROTOCOL, TRUE);
 $m->setOption(Memcached::OPT_NO_BLOCK, TRUE);
 $m->setOption(Memcached::OPT_AUTO_EJECT_HOSTS, TRUE);
 if (!$m->getServerList()) {
-    $servers = explode(",", getenv("MEMCACHIER_SERVERS"));
-    foreach ($servers as $s) {
-        $parts = explode(":", $s);
-        $m->addServers($parts[0], $parts[1]);
-    }
+    $server = explode(":",getenv("MEMCACHIER_SERVERS"));
+    $m->addServers($server[0], $server[1]);
 }
 $m->setSaslAuthData( getenv("MEMCACHIER_USERNAME")
                    , getenv("MEMCACHIER_PASSWORD") );
