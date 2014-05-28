@@ -12,9 +12,9 @@ if (!$m->getServerList()) {
 $m->setSaslAuthData( getenv("MEMCACHIER_USERNAME")
                    , getenv("MEMCACHIER_PASSWORD") );
 
-$output = $m->get("aktuel");
+$output = $m->get("aktuel_cache");
 
-if(empty($aktuel)){
+if(empty($output)){
 	require __DIR__.'/libs/ganon.php';
 	$link = "http://www.bim.com.tr/Categories/100/aktuel_urunler.aspx";
 	$html = file_get_dom($link);
@@ -41,7 +41,7 @@ echo "Bilgi : ".$link."\n\n";
 		$output.=$items[$i]."\t\t".$prices[$i].$pricesFraction[$i]."\n";
 	}
 	echo "<!-- #nocache -->";
-	$m->set("aktuel",$output,3600);
+	$m->set("aktuel_cache",$output,3600);
 }
 
 echo $output;
