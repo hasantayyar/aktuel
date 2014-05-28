@@ -43,5 +43,7 @@ echo "Bilgi : ".$link."\n\n";
 	echo "<!-- #nocache -->";
 	$m->set("aktuel_cache",$output,3600);
 }
-
+print_r($_SERVER);
+exit();
+echo "<pre>";
 echo $output;
