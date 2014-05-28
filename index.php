@@ -7,7 +7,7 @@ $m->setOption(Memcached::OPT_NO_BLOCK, TRUE);
 $m->setOption(Memcached::OPT_AUTO_EJECT_HOSTS, TRUE);
 if (!$m->getServerList()) {
     $server = explode(":",getenv("MEMCACHIER_SERVERS"));
-    $m->addServers($server[0], $server[1]);
+    $m->addServer($server[0], $server[1]);
 }
 $m->setSaslAuthData( getenv("MEMCACHIER_USERNAME")
                    , getenv("MEMCACHIER_PASSWORD") );
