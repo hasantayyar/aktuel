@@ -43,5 +43,5 @@ echo "Bilgi : ".$link."\n\n";
 	echo "<!-- #nocache -->";
 	$m->set("aktuel_cache",$output,3600);
 }
-echo isset($_SERVER['HTTP_COOKIE'])?"<pre>":"\n";
+echo "<pre>";
 echo $output;
