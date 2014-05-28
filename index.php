@@ -35,8 +35,6 @@ if(empty($output)){
 		}
 	
 	}
-echo "Bilgi : ".$link."\n\n";
-
 	for($i=0;$i<count($items);++$i){
 		$output.=$items[$i]."\t\t".$prices[$i].$pricesFraction[$i]."\n";
 	}
@@ -44,4 +42,5 @@ echo "Bilgi : ".$link."\n\n";
 	$m->set("aktuel_cache",$output,3600);
 }
 echo "<pre>";
+echo "Bilgi : ".$link."\n\n";
 echo $output;
