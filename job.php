@@ -1,6 +1,4 @@
 <?php 
-// create a new persistent client
-
 require __DIR__.'/libs/aktuel.php';
 $m = new Memcached("memcached_pool");
 $m->setOption(Memcached::OPT_BINARY_PROTOCOL, TRUE);
@@ -12,12 +10,5 @@ if (!$m->getServerList()) {
 }
 $m->setSaslAuthData( getenv("MEMCACHIER_USERNAME")
                    , getenv("MEMCACHIER_PASSWORD") );
-
-$output = $m->get("aktuel_cache");
-
-if(empty($output)){
-	$output = Aktuel::fetchAll();
-	$m->set("aktuel_cache",$output,3600);
-}
-echo "Bilgi : ".$link."\n\n";
-echo $output;
+$output = Aktuel::fetchAll();
+$m->set("aktuel_cache",$output,3600);

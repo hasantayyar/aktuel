@@ -1,6 +1,19 @@
 {
+
+	"name": "hasantayyar/synonyms",
+    "description": "Bim aktüel ürünlerinden haberdar olun!",
+    "keywords": ["bim", "ucuz", "aktüel"],
+    "license": "LGPL",
+    "authors": [
+        {
+            "name": "htayyar",
+            "email": "tayyar.besik@gmail.com"
+        }
+    ],
     "require": {
         "php": ">=5.3.2",
         "ext-memcached": "*"
-    }
+    },
+    "minimum-stability": "dev"
+ 
 }
