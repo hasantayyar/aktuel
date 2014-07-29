@@ -19,5 +19,6 @@ if(empty($output)){
 	$output = Aktuel::fetchAll();
 	$m->set("aktuel_cache",$output,3600);
 }
-echo "Bilgi : ".$link."\n\n";
+
+echo "<pre>\nBilgi : ".$link."\n\n";
 echo $output;
